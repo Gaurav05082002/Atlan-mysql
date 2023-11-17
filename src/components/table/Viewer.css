@@ -1,0 +1,80 @@
+.heading,
+.id-big-heading {
+  color: yellow;
+}
+
+.show-details {
+  border: 1px solid rgb(80, 125, 248);
+  color: lightblue;
+  background: transparent;
+}
+
+.id-small-heading {
+  display: none;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 10px; /* Adjust the gap as needed */
+  margin-bottom: 10px; /* Adjust the margin as needed */
+}
+
+@media (max-width: 425px) {
+  .id-small-heading {
+    display: inline-block;
+    color: yellow;
+  }
+  .id-big-heading {
+    display: none;
+  }
+}
+.sorted-entries {
+  color: black;
+}
+.sorted-entries-id {
+  color: blue;
+}
+
+.heading {
+  color: yellowgreen;
+}
+
+.search-input-field {
+  border: 2px solid rgb(137, 151, 233);
+  border-radius: 5px;
+  text-align: center;
+  color: blue;
+}
+.search-input-field:focus {
+  border: 2px solid rgb(136, 226, 155);
+}
+.search {
+  text-align: center;
+}
+.search-block {
+  background-color: rgb(93, 102, 110);
+}
+.search-heading {
+  color: rgb(239, 241, 88);
+  text-shadow: 2px 1px rgb(43, 41, 41);
+  font-family: "Lobster", cursive;
+}
+
+a.pageno-description {
+  color: lightcoral;
+  text-align: center;
+}
+a.prev-next-buttons {
+  background-color: lightgreen;
+}
+a.prev-next-buttons:hover {
+  background-color: lightgreen;
+}
+a.page-numbers {
+  background-color: lightgray;
+}
+a.page-numbers:active {
+  background-color: lightskyblue;
+}
