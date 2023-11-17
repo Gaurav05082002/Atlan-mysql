@@ -7,6 +7,7 @@ import Editor from './components/editor/Editor';
 import UseEffect from './components/states/UseEffect';
 import Viewer from './components/table/Viewer';
 import AdvanceTable from './components/Advanced/AdvanceTable';
+import DropDown from './components/Helper/DropDown';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Nav/>
       <Nav2/>
       <Editor/>
+      <DropDown/>
       {/* <AdvanceTable/> */}
   
       {/* <UseEffect/> */}

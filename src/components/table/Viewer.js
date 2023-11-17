@@ -12,6 +12,7 @@ import {
 } from "reactstrap";
 import { sortByAsc, sortByDeAsc } from "../Helper/SortFunctions";
 import downloadJsonFile from "../Helper/DownloadJSON";
+import DropDown from "../Helper/DropDown";
 
 const Viewer = () => {
   const [filterData, setFilterData] = useState([]);
@@ -19,6 +20,8 @@ const Viewer = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [pagiNation, setPagiNation] = useState(true);
   const [inputValue, setInputValue] = useState("");
+  const [rowsNumber ,setRowsNumber] = useState(5);
+  
   const [text, setText] = useState({
     orderID: false,
     productID: false,
@@ -36,7 +39,7 @@ const Viewer = () => {
   ];
 
   useEffect(() => {
-    const data = Data1;
+    const data = Data;
 
     setFilterData(data);
     hidePagination(data);
@@ -127,7 +130,7 @@ const Viewer = () => {
   const pageSize = 5;
   const pagesCount = Math.ceil(filterData.length / pageSize);
   const renderPaginationButtons = () => {
-    const buttonsToShow = 5; // Number of buttons to show in a group
+    const buttonsToShow = 10; // Number of buttons to show in a group
     const start = Math.max(0, currentPage - Math.floor(buttonsToShow / 2));
     const end = Math.min(pagesCount, start + buttonsToShow);
 
@@ -151,10 +154,17 @@ const Viewer = () => {
   return (
     <>
       <div className="button-container">
+       
+
+       
+        <DropDown setRowsNumber={setRowsNumber}/>
+
         <input
           type="number"
-          className="form-control-sm"
+          className="form-control-sm "
+         
           placeholder="Search By order id"
+          
           // value={inputValue}
           onChange={handleInputChange}
         />
@@ -162,7 +172,8 @@ const Viewer = () => {
         {isSearching ? (
           <button
             type="button"
-            className="btn btn-secondary btn-sm"
+            className="btn btn-secondary btn-sm "
+          
             onClick={handleResetClick}
           >
             Reset
@@ -179,8 +190,9 @@ const Viewer = () => {
 
         <button
           type="button"
-          class="btn btn-secondary btn-sm"
+          class="btn btn-secondary btn-sm, downloadbtn"
           onClick={downloadJsonFileFun}
+          
         >
           Download JSON
         </button>
@@ -192,7 +204,7 @@ const Viewer = () => {
           <thead>{renderTableHeader()}</thead>
           <tbody>
             {filterData
-              .slice(currentPage * 5, (currentPage + 1) * 5)
+              .slice(currentPage * 5, (currentPage + rowsNumber/5) * 5)
               .map((i, index) => (
                 <tr key={i.orderID + "_" + index}>
                   <td>{i.orderID}</td>

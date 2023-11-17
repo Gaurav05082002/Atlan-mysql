@@ -12,12 +12,19 @@
 .id-small-heading {
   display: none;
 }
-
+/* .productID-input{
+  margin-right: 0 !important;
+  border: solid 2px green;
+} */
+.downloadbtn{
+  margin-left: 10px !important;
+  /* border: solid 10px red; */
+}
 .button-container {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  gap: 10px; /* Adjust the gap as needed */
+ /* Adjust the gap as needed */
   margin-bottom: 10px; /* Adjust the margin as needed */
 }
 
