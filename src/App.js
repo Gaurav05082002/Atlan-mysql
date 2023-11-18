@@ -18,8 +18,7 @@ function App() {
       <Nav/>
       <Nav2/>
       <Editor/>
-      <DropDown/>
-      {/* <AdvanceTable/> */}
+        {/* <AdvanceTable/> */}
   
       {/* <UseEffect/> */}
        

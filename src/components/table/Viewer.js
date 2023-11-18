@@ -14,7 +14,8 @@ import { sortByAsc, sortByDeAsc } from "../Helper/SortFunctions";
 import downloadJsonFile from "../Helper/DownloadJSON";
 import DropDown from "../Helper/DropDown";
 
-const Viewer = () => {
+const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOperator' , numberValue = '1'}) => {
+  console.log("paramsin viewer.js" , selectedTable , selectedOperator ,numberValue );
   const [filterData, setFilterData] = useState([]);
   const [prevData, setPrevData] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);

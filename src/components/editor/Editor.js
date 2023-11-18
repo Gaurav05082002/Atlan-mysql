@@ -7,6 +7,7 @@ import { GrActions } from "react-icons/gr";
 import { GrApps } from "react-icons/gr";
 import { AiFillGithub, AiFillFacebook, AiOutlineTwitter } from "react-icons/ai";
 import { IoBugSharp } from "react-icons/io5";
+import SqlQuery1 from "../QueryInputs/SqlQuery1.js";
 
 import "./Editor.css";
 
@@ -19,6 +20,26 @@ const Editor = () => {
   // const [data, setdata] = useState();
   const [stl, setstl] = useState("inputcode");
   const [file, setfile] = useState("categories.csv");
+
+
+
+
+  // Define parameters in Editor.js state
+  const [selectedTable, setSelectedTable] = React.useState('DefaultTable');
+  const [selectedNum , setSelectedNumber] =  React.useState('DefaultTable');
+  const [selectedOperator, setSelectedOperator] = React.useState('DefaultOperator');
+
+  // Handler to update parameters based on QueryInput selections
+  const handleExecute = (table, operator , num ) => {
+    setSelectedTable(table);
+    
+    setSelectedOperator(operator);
+    setSelectedNumber(num);
+  };
+
+
+
+
   //this function is for removing or changing  size of file explorer in our window
   function sizechange() {
     if (size) {
@@ -193,15 +214,19 @@ const Editor = () => {
           <textarea
             className={stl}
             placeholder="write your code here"
+           
           ></textarea>
-          <button
+           <SqlQuery1 onExecute={handleExecute} />
+          
+
+          {/* <button
             type="button"
             class="btn btn-secondary btn-sm"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal2"
           >
             Run Query
-          </button>
+          </button> */}
         
           {/* this modal is for result button once the code is done ,this will also allow us to send the result to particular gmail id  */}
           <div
@@ -270,13 +295,13 @@ const Editor = () => {
             </div>
           </div>
         </div>
-
+       
         {/* the below div is for viewing data  */}
         <div id="rightdown">
-          <h6 className="ediname">VIEW DATA of </h6>
-
+          {/* <h6 className="ediname">VIEW DATA of </h6> */}
+          <Viewer selectedTable={selectedTable}  selectedOperator={selectedOperator} selectedNum={selectedNum} />
           {/* csv to html is used to convert csv data to html table form  */}
-           <Viewer  />
+         
           {/* <CsvToHtmlTable data={data} csvDelimiter="," /> */}
         </div>
       </div>
