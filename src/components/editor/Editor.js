@@ -1,6 +1,7 @@
 //all imports
 import { useState } from "react";
-import { CsvToHtmlTable } from "react-csv-to-table";
+import { Container, Row, Col } from 'react-bootstrap';
+// import { CsvToHtmlTable } from "react-csv-to-table";
 import React from "react";
 import { GrBladesVertical } from "react-icons/gr";
 import { GrActions } from "react-icons/gr";
@@ -8,7 +9,7 @@ import { GrApps } from "react-icons/gr";
 import { AiFillGithub, AiFillFacebook, AiOutlineTwitter } from "react-icons/ai";
 import { IoBugSharp } from "react-icons/io5";
 import SqlQuery1 from "../QueryInputs/SqlQuery1.js";
-
+import SqlQuery2 from "../QueryInputs/SqlQuery2.js";
 import "./Editor.css";
 
 import Viewer from "../table/Viewer.js";
@@ -26,16 +27,23 @@ const Editor = () => {
 
   // Define parameters in Editor.js state
   const [selectedTable, setSelectedTable] = React.useState('DefaultTable');
-  const [selectedNum , setSelectedNumber] =  React.useState('DefaultTable');
+  // const [selectedNum , setSelectedNumber] =  React.useState();
   const [selectedOperator, setSelectedOperator] = React.useState('DefaultOperator');
+  const [numberValue, setNumberValue] = useState('input num');
 
+
+   //for query 2
+   const [selectedColumnQ2, setSelectedColumnQ2] = React.useState('DefaultTable');
   // Handler to update parameters based on QueryInput selections
-  const handleExecute = (table, operator , num ) => {
+  const handleExecuteQuery1 = (table, operator , num ) => {
     setSelectedTable(table);
     
     setSelectedOperator(operator);
-    setSelectedNumber(num);
+    setNumberValue(num);
   };
+  const handleExecuteQuery2 = (columnq2)=> {
+    setSelectedColumnQ2(columnq2)
+  }
 
 
 
@@ -209,14 +217,27 @@ const Editor = () => {
         {/* <div id='rightup'></div> */}
         {/* the below div is code edit part  */}
         <div id="rightmid">
-          <h6 className="ediname">EDIT DATA of </h6>
+          <h6 className="ediname"> Please Complete query feilds </h6>
+            
+          <Container fluid>
+      <Row className="mt-4">
+        <Col>
+          <SqlQuery1 onExecute={handleExecuteQuery1} />
+        </Col>
+      </Row>
 
-          <textarea
+      <Row className="mt-4">
+        <Col>
+          <SqlQuery2 onExecute = {handleExecuteQuery2}/>
+        </Col>
+      </Row>
+    </Container>
+           
+          {/* <textarea
             className={stl}
             placeholder="write your code here"
            
-          ></textarea>
-           <SqlQuery1 onExecute={handleExecute} />
+          ></textarea> */}
           
 
           {/* <button
@@ -299,7 +320,7 @@ const Editor = () => {
         {/* the below div is for viewing data  */}
         <div id="rightdown">
           {/* <h6 className="ediname">VIEW DATA of </h6> */}
-          <Viewer selectedTable={selectedTable}  selectedOperator={selectedOperator} selectedNum={selectedNum} />
+          <Viewer selectedTable={selectedTable}  selectedOperator={selectedOperator} numberValue={numberValue} selectedColumnQ2={selectedColumnQ2} />
           {/* csv to html is used to convert csv data to html table form  */}
          
           {/* <CsvToHtmlTable data={data} csvDelimiter="," /> */}

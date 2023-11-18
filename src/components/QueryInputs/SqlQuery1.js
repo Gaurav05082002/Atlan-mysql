@@ -4,9 +4,9 @@ import { Form, Row, Col, Dropdown, Button } from 'react-bootstrap';
 const SqlQuery1 = ({ onExecute }) => {
   const [selectedTable, setSelectedTable] = useState('choose');
   const [selectedOperator, setSelectedOperator] = useState('choose');
-  const [numberValue, setNumberValue] = useState('choose');
+  const [numberValue, setNumberValue] = useState('input num');
 
-  const tableOptions = ['Table1', 'Table2', 'Table3'];
+  const tableOptions = ['orderId', 'productID', 'unitPrice' , 'quantity' , 'discount'];
   const operatorOptions = ['=', '!=', '>', '<'];
 
   const handleExecute = () => {
