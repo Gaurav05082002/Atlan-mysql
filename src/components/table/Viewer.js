@@ -25,6 +25,7 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
   const [inputValue, setInputValue] = useState("");
   const [rowsNumber ,setRowsNumber] = useState(5);
   const [actualData ,setActualData] = useState([]);
+  const [runningQuery, setRunningQuery] = useState();
   
   const [text, setText] = useState({
     orderID: false,
@@ -63,6 +64,7 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
       // Apply the filter and set filtered data
       const newData = Query1Logic(actualData, selectedTable, selectedOperator, numberValue );
       setFilterData(newData);
+      setRunningQuery(1);
     }
   }, [selectedTable, selectedOperator, numberValue]);
 
@@ -76,6 +78,7 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
       const result = Query2Logic(actualData, selectedColumnQ2);
       console.log(result);
       setFilterData(result);
+      setRunningQuery(2);
     }
   }, [selectedColumnQ2 ]);
 
@@ -155,10 +158,7 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
       );
       setIsSearching(true);
     }
-    // console.log("in search",selectedColumnQ2);
-    // const result = Query2Logic(filterData , selectedColumnQ2);
-    // const resultq1 = Query1Logic(selectedTable, selectedOperator, numberValue);
-    //  setFilterData(result);
+
 
     
   
@@ -167,6 +167,31 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
     setFilterData(prevData);
     setInputValue("");
     setIsSearching(false);
+  };
+
+  const handleSaveClick = () => {
+    // Save the current filter data and parameters in local storage
+    const savedData = {
+      filterData: filterData,
+      parameters: {
+        runningQuery: runningQuery,
+        selectedTable: selectedTable,
+        selectedOperator: selectedOperator,
+        numberValue: numberValue,
+        selectedColumnQ2: selectedColumnQ2,
+      },
+    };
+
+    // Retrieve existing saved data from local storage
+    const existingSavedData = JSON.parse(localStorage.getItem("savedData")) || [];
+
+    // Add the current data to the existing saved data
+    const newSavedData = [...existingSavedData, savedData];
+
+    // Save the updated data back to local storage
+    localStorage.setItem("savedData", JSON.stringify(newSavedData));
+
+    console.log("Data saved successfully!");
   };
 
   const pageSize = 5;
@@ -211,6 +236,14 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
          study
         </button>
         */}
+
+        <button
+          type="button"
+          className="btn btn-secondary btn-sm, downloadbtn"
+          onClick={handleSaveClick}
+        >
+          Save
+        </button>
         <DropDown setRowsNumber={setRowsNumber}/>
 
         <input

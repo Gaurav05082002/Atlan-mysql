@@ -1,5 +1,5 @@
 //all imports
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import { Container, Row, Col } from 'react-bootstrap';
 // import { CsvToHtmlTable } from "react-csv-to-table";
 import React from "react";
@@ -15,6 +15,12 @@ import "./Editor.css";
 import Viewer from "../table/Viewer.js";
 const Editor = () => {
   var a = 300;
+  const [savedData, setSavedData] = useState([]);
+  useEffect(() => {
+    // Retrieve saved data from local storage
+    const storedData = JSON.parse(localStorage.getItem("savedData")) || [];
+    setSavedData(storedData);
+  }, [savedData]);
 
   const [size, setsize] = useState(a);
   const [visi, setvisi] = useState("visible");
@@ -41,9 +47,38 @@ const Editor = () => {
     setSelectedOperator(operator);
     setNumberValue(num);
   };
+
+
   const handleExecuteQuery2 = (columnq2)=> {
     setSelectedColumnQ2(columnq2)
   }
+
+  const handleExecuteSavedQuery = (item) => {
+    if (item.parameters.runningQuery === 1) {
+      handleExecuteQuery1(item.parameters.selectedTable ,  item.parameters.selectedOperator, item.parameters.numberValue )
+      // Execute Query 1
+      // Query1Logic(item.parameters.selectedTable, item.parameters.selectedOperator, item.parameters.numberValue);
+    } else if (item.parameters.runningQuery === 2) {
+      // Execute Query 2
+      handleExecuteQuery2(item.parameters.selectedColumnQ2)
+      // Query2Logic(item.parameters.selectedColumnQ2);
+    }
+  };
+
+  // Function to remove a saved query from local storage
+  const handleRemoveSavedQuery = (index) => {
+    // Retrieve existing saved data from local storage
+    const existingSavedData = JSON.parse(localStorage.getItem("savedData")) || [];
+
+    // Remove the item at the specified index
+    existingSavedData.splice(index, 1);
+
+    // Save the updated data back to local storage
+    localStorage.setItem("savedData", JSON.stringify(existingSavedData));
+
+    // Update the state to reflect the change
+    setSavedData(existingSavedData);
+  };
 
 
 
@@ -113,8 +148,10 @@ const Editor = () => {
 
       {/* div LEFTTWO  is second div from left side and it is file explorer which will also help us in inserting and remove a particular file 
   from here you can choose a file and then can view its data or edit its data or remove that file  */}
-      <div id="lefttwo" style={{ width: size, visibility: visi }}>
-        <h6>explorer</h6>
+      <div id="lefttwo" style={{ width: size, visibility: visi  ,   backgroundColor:'#6c757e'}}>
+        <h6 style={{ marginTop:'10px' , color:"white" , fontFamily:"Lobster cursive" }} >Old Queries</h6>
+       
+
 
         {/* this MODAL FOR BUG BUTTON present in LEFTONE div  */}
         <div
@@ -209,6 +246,55 @@ const Editor = () => {
           Remove
         </button>
         {/* all files in file explorer select file for editing viewing or removing it  */}
+        <ul
+  className="list-group"
+  style={{
+    padding: "0.2rem",
+    fontFamily: "georgia",
+    fontSize: "14px",
+    textAlign: "left",
+    color: "white",
+  }}
+>
+  {savedData.map((item, index) => (
+    <li key={index} style={{ listStyleType: "none" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <button
+          className="btn btn-secondary btn-sm"
+          style={{
+            border: "0px",
+            margin: "2px",
+            width: "90%",
+            marginLeft: "1%",
+            marginRight: "1%",
+            fontFamily: "Lobster",
+            textAlign: "left",
+            border: "solid 1px white",
+          }}
+          onClick={() => handleExecuteSavedQuery(item)}
+        >
+          {item.parameters.runningQuery === 1
+            ? `${item.parameters.selectedTable} ${item.parameters.selectedOperator} ${item.parameters.numberValue}`
+            : `DISTINCT ${item.parameters.selectedColumnQ2}`}
+        </button>
+        <button
+          className="btn btn-secondary btn-sm"
+          style={{ marginLeft: "5px" , border: "solid 1px white", }}
+          onClick={() => handleRemoveSavedQuery(index)}
+        >
+          X
+        </button>
+      </div>
+    </li>
+  ))}
+</ul>
+
         {/*  */}
       </div>
 
