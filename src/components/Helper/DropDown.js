@@ -9,7 +9,7 @@ const DropDown = ({ setRowsNumber }) => {
   };
 
   return (
-    <Dropdown onSelect={handleSelect} style={{ marginRight: "10px", marginLeft: "10px", border: "2px solid black" }}
+    <Dropdown onSelect={handleSelect} style={{ marginRight: "10px", marginLeft: "10px"  , border:"solid 1px grey" }}
     >
       <Dropdown.Toggle variant="light" >
         Rows

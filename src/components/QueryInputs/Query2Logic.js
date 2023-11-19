@@ -42,17 +42,17 @@
 //   };
   
 export const Query2Logic = (data, columnName) => {
-    console.log("column name in q2", columnName);
-    console.log("data in q2", data);
+    // console.log("column name in q2", columnName);
+    // console.log("data in q2", data);
   
     const uniqueColumnValues = Array.from(new Set(data.map(product => product[columnName])));
-    console.log("uniqueColumnValues", uniqueColumnValues);
+    // console.log("uniqueColumnValues", uniqueColumnValues);
   
     const uniqueProducts = uniqueColumnValues.map(columnValue => {
       return data.find(product => product[columnName] === columnValue);
     });
   
-    console.log("unique products", uniqueProducts);
+    // console.log("unique products", uniqueProducts);
     return uniqueProducts;
   };
   

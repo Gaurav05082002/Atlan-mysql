@@ -27,6 +27,25 @@
  /* Adjust the gap as needed */
   margin-bottom: 10px; /* Adjust the margin as needed */
   margin-top: 10px;
+  /* font-size: 14px; */
+}
+.small-buttons button {
+  font-size: 12px; /* Adjust the font size as needed */
+  padding: 5px 10px; /* Adjust the padding as needed */
+}
+.results-heading {
+  margin-right: auto; /* Push the heading to the left */
+  margin-left: 10px;
+  /* border: solid 2px blue; */
+  align-items: center;
+}
+.results-heading h5 {
+  font-size: 16px; 
+  margin-bottom: 0; /* Remove bottom margin for better alignment with buttons */
+  margin-right: 10px; /* Adjust the margin as needed */
+  margin-top: 10px;
+  font-family: lobuster;
+  font-weight: bold;
 }
 
 @media (max-width: 425px) {

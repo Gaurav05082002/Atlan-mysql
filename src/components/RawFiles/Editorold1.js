@@ -39,7 +39,7 @@ const Editor = () => {
 
 
    //for query 2
-   const [selectedColumnQ2, setSelectedColumnQ2] = React.useState('DefaultCol');
+   const [selectedColumnQ2, setSelectedColumnQ2] = React.useState('DefaultTable');
   // Handler to update parameters based on QueryInput selections
   const handleExecuteQuery1 = (table, operator , num ) => {
     setSelectedTable(table);
@@ -191,7 +191,7 @@ const Editor = () => {
         </div>
 
         {/* insert button in file explorer for inserting file and starting work on it  */}
-        {/* <button
+        <button
           type="button"
           style={{ marginRight: "0.5rem" }}
           class="btn btn-secondary btn-sm"
@@ -199,7 +199,7 @@ const Editor = () => {
           data-bs-target="#exampleModal"
         >
           Insert
-        </button> */}
+        </button>
 
         {/* modal that will work on clicking above insert button  */}
         <div
@@ -241,10 +241,10 @@ const Editor = () => {
             </div>
           </div>
         </div>
-{/* 
+
         <button type="button" class="btn btn-secondary btn-sm">
           Remove
-        </button> */}
+        </button>
         {/* all files in file explorer select file for editing viewing or removing it  */}
         <ul
   className="list-group"
@@ -303,8 +303,7 @@ const Editor = () => {
         {/* <div id='rightup'></div> */}
         {/* the below div is code edit part  */}
         <div id="rightmid">
-          {/* <h6 className="ediname"> Please Complete query feilds </h6> */}
-          <h6 style={{ marginTop:'10px' , color:"white" , fontFamily:"Lobster cursive" }} >Please Complete query feilds </h6>
+          <h6 className="ediname"> Please Complete query feilds </h6>
             
           <Container fluid>
       <Row className="mt-4">

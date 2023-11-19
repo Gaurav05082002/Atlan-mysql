@@ -54,7 +54,7 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
     hidePagination(data);
   }, []);
 
-  console.log("filterdata in view" , filterData);
+  // console.log("filterdata in view" , filterData);
   
   useEffect(() => {
     // Check if any of the values have changed
@@ -65,6 +65,8 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
       const newData = Query1Logic(actualData, selectedTable, selectedOperator, numberValue );
       setFilterData(newData);
       setRunningQuery(1);
+      
+    
     }
   }, [selectedTable, selectedOperator, numberValue]);
 
@@ -73,12 +75,13 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
     const isChanged = selectedColumnQ2 !== 'DefaultCol'
     if (isChanged && actualData.length != 0) {
       // Apply the query and set result
-      console.log("data in viewer,js " , filterData);
+      
       
       const result = Query2Logic(actualData, selectedColumnQ2);
-      console.log(result);
+     
       setFilterData(result);
       setRunningQuery(2);
+      
     }
   }, [selectedColumnQ2 ]);
 
@@ -181,7 +184,6 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
         selectedColumnQ2: selectedColumnQ2,
       },
     };
-
     // Retrieve existing saved data from local storage
     const existingSavedData = JSON.parse(localStorage.getItem("savedData")) || [];
 
@@ -192,7 +194,15 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
     localStorage.setItem("savedData", JSON.stringify(newSavedData));
 
     console.log("Data saved successfully!");
+    // setRunningQuery(0);
   };
+
+  // useEffect(()=>{
+  //   if(runningQuery == 1 || runningQuery == 2){
+  //     handleSaveClick();
+  //   }
+  //   console.log('runnig query chnaged' )
+  // }, [runningQuery]);
 
   const pageSize = 5;
   const pagesCount = Math.ceil(filterData.length / pageSize);
@@ -220,29 +230,30 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
 
   return (
     <>
-      <div className="button-container">
-{/*        
-      <button
-          type="button"
-          class="btn btn-secondary btn-sm, downloadbtn"
-          onClick={() =>{
 
-            const result = Query2Logic(filterData , selectedColumnQ2);
-    const resultq1 = Query1Logic(filterData ,selectedTable, selectedOperator, numberValue);
-     setFilterData(result);
-          } }
-          
+
+      <div className="button-container small-buttons">
+      <div className="results-heading">
+    <h5>RESULTS</h5>
+  </div>
+        <button
+          type="button"
+          className="btn btn-secondary btn-sm, downloadbtn"
+          onClick={()=>{setFilterData(actualData)}}
+          size="sm"
         >
-         study
+        Reset
         </button>
-        */}
+
+     
 
         <button
           type="button"
           className="btn btn-secondary btn-sm, downloadbtn"
           onClick={handleSaveClick}
+          size="sm"
         >
-          Save
+          Save Query
         </button>
         <DropDown setRowsNumber={setRowsNumber}/>
 
@@ -251,7 +262,7 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
           className="form-control-sm "
          
           placeholder="Search By order id"
-          
+          size="sm"
           // value={inputValue}
           onChange={handleInputChange}
         />
