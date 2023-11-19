@@ -6,7 +6,7 @@ const SqlQuery1 = ({ onExecute }) => {
   const [selectedOperator, setSelectedOperator] = useState('choose');
   const [numberValue, setNumberValue] = useState('input num');
 
-  const tableOptions = ['orderId', 'productID', 'unitPrice' , 'quantity' , 'discount'];
+  const tableOptions = ['orderID', 'productID', 'unitPrice' , 'quantity' , 'discount'];
   const operatorOptions = ['=', '!=', '>', '<'];
 
   const handleExecute = () => {

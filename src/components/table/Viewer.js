@@ -24,6 +24,7 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
   const [pagiNation, setPagiNation] = useState(true);
   const [inputValue, setInputValue] = useState("");
   const [rowsNumber ,setRowsNumber] = useState(5);
+  const [actualData ,setActualData] = useState([]);
   
   const [text, setText] = useState({
     orderID: false,
@@ -45,30 +46,38 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
     const data = Data1;
 
     setFilterData(data);
+    setActualData(data);
+        
+        // setFilterData(result);
+      // console.log(result);
     hidePagination(data);
   }, []);
 
-  // useEffect(() => {
-  //   // Check if any of the values have changed
-  //   const isChanged = selectedTable !== 'DefaultTable' || selectedOperator !== 'DefaultOperator' || numberValue !== 'input num';
+  console.log("filterdata in view" , filterData);
+  
+  useEffect(() => {
+    // Check if any of the values have changed
+    const isChanged = selectedTable !== 'DefaultTable' || selectedOperator !== 'DefaultOperator' || numberValue !== 'input num';
 
-  //   if (isChanged) {
-  //     // Apply the filter and set filtered data
-  //     const newData = Query1Logic(filterData, selectedTable, selectedOperator, numberValue );
-  //     setFilterData(newData);
-  //   }
-  // }, [selectedTable, selectedOperator, numberValue]);
+    if (isChanged) {
+      // Apply the filter and set filtered data
+      const newData = Query1Logic(actualData, selectedTable, selectedOperator, numberValue );
+      setFilterData(newData);
+    }
+  }, [selectedTable, selectedOperator, numberValue]);
 
-  // useEffect(() => {
-  //   // Check if columnName has changed
-  //   if (selectedColumnQ2 !== 'DefaultCol') {
-  //     // Apply the query and set result
-  //     console.log("data in viewer,js " , filterData);
-  //     const result = Query2Logic(filterData, selectedColumnQ2);
-  //     console.log(result);
-  //     setFilterData(result);
-  //   }
-  // }, [selectedColumnQ2 ]);
+  useEffect(() => {
+    // Check if columnName has changed
+    const isChanged = selectedColumnQ2 !== 'DefaultCol'
+    if (isChanged && actualData.length != 0) {
+      // Apply the query and set result
+      console.log("data in viewer,js " , filterData);
+      
+      const result = Query2Logic(actualData, selectedColumnQ2);
+      console.log(result);
+      setFilterData(result);
+    }
+  }, [selectedColumnQ2 ]);
 
 
   const handleClick = (event, index) => {
@@ -138,7 +147,7 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
-  const handleSearchClick = () => {
+  const handleSearchClick = ( ) => {
     if (inputValue) {
       setPrevData(originalData);
       setFilterData(
@@ -146,6 +155,11 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
       );
       setIsSearching(true);
     }
+    // console.log("in search",selectedColumnQ2);
+    // const result = Query2Logic(filterData , selectedColumnQ2);
+    // const resultq1 = Query1Logic(selectedTable, selectedOperator, numberValue);
+    //  setFilterData(result);
+
     
   
   };
@@ -182,9 +196,21 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
   return (
     <>
       <div className="button-container">
-       
+{/*        
+      <button
+          type="button"
+          class="btn btn-secondary btn-sm, downloadbtn"
+          onClick={() =>{
 
-       
+            const result = Query2Logic(filterData , selectedColumnQ2);
+    const resultq1 = Query1Logic(filterData ,selectedTable, selectedOperator, numberValue);
+     setFilterData(result);
+          } }
+          
+        >
+         study
+        </button>
+        */}
         <DropDown setRowsNumber={setRowsNumber}/>
 
         <input

@@ -59,6 +59,8 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
   //   }
   // }, [selectedTable, selectedOperator, numberValue]);
 
+
+  
   // useEffect(() => {
   //   // Check if columnName has changed
   //   if (selectedColumnQ2 !== 'DefaultCol') {

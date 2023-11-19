@@ -6,7 +6,7 @@ const SqlQuery2 = ({ onExecute }) => {
   const [selectedColumn, setSelectedColumn] = useState('Choose');
 
 
-  const columnOptions = ['orderId', 'productID', 'unitPrice' , 'quantity' , 'discount'];
+  const columnOptions = ['orderID', 'productID', 'unitPrice' , 'quantity' , 'discount'];
   
   const handleExecute = () => {
     onExecute( selectedColumn);
