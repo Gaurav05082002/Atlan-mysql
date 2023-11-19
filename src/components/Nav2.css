@@ -12,11 +12,7 @@
     box-shadow: 2px 2px;
 
 }
-#navbtn  {
-    margin-left: 0.3rem;
-    margin-left: 0.5rem;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-}
+
 .navdiv{
     position: fixed;
 }

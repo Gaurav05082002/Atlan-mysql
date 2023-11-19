@@ -16,17 +16,28 @@ import DropDown from "../Helper/DropDown";
 import { Query1Logic } from "../QueryInputs/Query1Logic";
 import { Query2Logic } from "../QueryInputs/Query2Logic";
 
-const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOperator' , numberValue = 'input num' , selectedColumnQ2 ='DefaultCol'}) => {
-  console.log("paramsin viewer.js" , selectedTable , selectedOperator ,numberValue , selectedColumnQ2 );
+const Viewer = ({
+  selectedTable = "DefaultTable",
+  selectedOperator = "DefaultOperator",
+  numberValue = "input num",
+  selectedColumnQ2 = "DefaultCol",
+}) => {
+  console.log(
+    "paramsin viewer.js",
+    selectedTable,
+    selectedOperator,
+    numberValue,
+    selectedColumnQ2
+  );
   const [filterData, setFilterData] = useState([]);
   const [prevData, setPrevData] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [pagiNation, setPagiNation] = useState(true);
   const [inputValue, setInputValue] = useState("");
-  const [rowsNumber ,setRowsNumber] = useState(5);
-  const [actualData ,setActualData] = useState([]);
+  const [rowsNumber, setRowsNumber] = useState(5);
+  const [actualData, setActualData] = useState([]);
   const [runningQuery, setRunningQuery] = useState();
-  
+
   const [text, setText] = useState({
     orderID: false,
     productID: false,
@@ -48,43 +59,46 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
 
     setFilterData(data);
     setActualData(data);
-        
-        // setFilterData(result);
-      // console.log(result);
+
+    // setFilterData(result);
+    // console.log(result);
     hidePagination(data);
   }, []);
 
   // console.log("filterdata in view" , filterData);
-  
+
   useEffect(() => {
     // Check if any of the values have changed
-    const isChanged = selectedTable !== 'DefaultTable' || selectedOperator !== 'DefaultOperator' || numberValue !== 'input num';
+    const isChanged =
+      selectedTable !== "DefaultTable" ||
+      selectedOperator !== "DefaultOperator" ||
+      numberValue !== "inputnum";
 
     if (isChanged) {
       // Apply the filter and set filtered data
-      const newData = Query1Logic(actualData, selectedTable, selectedOperator, numberValue );
+      const newData = Query1Logic(
+        actualData,
+        selectedTable,
+        selectedOperator,
+        numberValue
+      );
       setFilterData(newData);
       setRunningQuery(1);
-      
-    
     }
   }, [selectedTable, selectedOperator, numberValue]);
 
   useEffect(() => {
     // Check if columnName has changed
-    const isChanged = selectedColumnQ2 !== 'DefaultCol'
+    const isChanged = selectedColumnQ2 !== "DefaultCol";
     if (isChanged && actualData.length != 0) {
       // Apply the query and set result
-      
-      
+
       const result = Query2Logic(actualData, selectedColumnQ2);
-     
+
       setFilterData(result);
       setRunningQuery(2);
-      
     }
-  }, [selectedColumnQ2 ]);
-
+  }, [selectedColumnQ2]);
 
   const handleClick = (event, index) => {
     setCurrentPage(index);
@@ -120,12 +134,14 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
   // headers for table
   const renderTableHeader = () => {
     return properties.map((property, index) => (
-      <th className="heading" key={index}>
+      <th className="heading" style={{ color: "white" }} key={index}>
         {property}
         <Button
           outline
-          color="primary"
+          color="white"
+          // color="grey"
           type="button"
+          style={{ marginLeft: "4px", color: "white" }}
           onClick={() => changeText(property)}
         >
           {text[property] ? "▲" : "▼"}
@@ -153,7 +169,7 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
-  const handleSearchClick = ( ) => {
+  const handleSearchClick = () => {
     if (inputValue) {
       setPrevData(originalData);
       setFilterData(
@@ -161,10 +177,6 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
       );
       setIsSearching(true);
     }
-
-
-    
-  
   };
   const handleResetClick = () => {
     setFilterData(prevData);
@@ -174,35 +186,35 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
 
   const handleSaveClick = () => {
     // Save the current filter data and parameters in local storage
-    const savedData = {
-      filterData: filterData,
-      parameters: {
-        runningQuery: runningQuery,
-        selectedTable: selectedTable,
-        selectedOperator: selectedOperator,
-        numberValue: numberValue,
-        selectedColumnQ2: selectedColumnQ2,
-      },
-    };
-    // Retrieve existing saved data from local storage
-    const existingSavedData = JSON.parse(localStorage.getItem("savedData")) || [];
+    if (runningQuery == 1 || runningQuery == 2) {
+      const savedData = {
+        // filterData: filterData,
+        parameters: {
+          runningQuery: runningQuery,
+          selectedTable: selectedTable,
+          selectedOperator: selectedOperator,
+          numberValue: numberValue,
+          selectedColumnQ2: selectedColumnQ2,
+        },
+      };
+      // Retrieve existing saved data from local storage
+      const existingSavedData =
+        JSON.parse(localStorage.getItem("savedData")) || [];
 
-    // Add the current data to the existing saved data
-    const newSavedData = [...existingSavedData, savedData];
+      // Add the current data to the existing saved data
+      const newSavedData = [...existingSavedData, savedData];
 
-    // Save the updated data back to local storage
-    localStorage.setItem("savedData", JSON.stringify(newSavedData));
-
-    console.log("Data saved successfully!");
+      // Save the updated data back to local storage
+      localStorage.setItem("savedData", JSON.stringify(newSavedData));
+      alert(
+        "you can see saved queries by REFRESH in Old Queries Panel and can directly run by clicking them "
+      );
+      console.log("Data saved successfully!");
+    } else {
+      alert("give parameters for query properly");
+    }
     // setRunningQuery(0);
   };
-
-  // useEffect(()=>{
-  //   if(runningQuery == 1 || runningQuery == 2){
-  //     handleSaveClick();
-  //   }
-  //   console.log('runnig query chnaged' )
-  // }, [runningQuery]);
 
   const pageSize = 5;
   const pagesCount = Math.ceil(filterData.length / pageSize);
@@ -230,22 +242,20 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
 
   return (
     <>
-
-
       <div className="button-container small-buttons">
-      <div className="results-heading">
-    <h5>RESULTS</h5>
-  </div>
+        <div className="results-heading">
+          <h5>RESULTS</h5>
+        </div>
         <button
           type="button"
           className="btn btn-secondary btn-sm, downloadbtn"
-          onClick={()=>{setFilterData(actualData)}}
+          onClick={() => {
+            setFilterData(actualData);
+          }}
           size="sm"
         >
-        Reset
+          Reset
         </button>
-
-     
 
         <button
           type="button"
@@ -255,12 +265,11 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
         >
           Save Query
         </button>
-        <DropDown setRowsNumber={setRowsNumber}/>
+        <DropDown setRowsNumber={setRowsNumber} />
 
         <input
           type="number"
           className="form-control-sm "
-         
           placeholder="Search By order id"
           size="sm"
           // value={inputValue}
@@ -271,7 +280,6 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
           <button
             type="button"
             className="btn btn-secondary btn-sm "
-          
             onClick={handleResetClick}
           >
             Reset
@@ -290,7 +298,6 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
           type="button"
           class="btn btn-secondary btn-sm, downloadbtn"
           onClick={downloadJsonFileFun}
-          
         >
           Download JSON
         </button>
@@ -302,7 +309,7 @@ const Viewer = ({ selectedTable = 'DefaultTable',selectedOperator = 'DefaultOper
           <thead>{renderTableHeader()}</thead>
           <tbody>
             {filterData
-              .slice(currentPage * 5, (currentPage + rowsNumber/5) * 5)
+              .slice(currentPage * 5, (currentPage + rowsNumber / 5) * 5)
               .map((i, index) => (
                 <tr key={i.orderID + "_" + index}>
                   <td>{i.orderID}</td>

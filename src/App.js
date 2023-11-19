@@ -1,29 +1,21 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
-
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Nav from './components/Nav';
-import Nav2 from './components/Nav2';
 import Editor from './components/editor/Editor';
-import UseEffect from './components/states/UseEffect';
-import Viewer from './components/table/Viewer';
-import AdvanceTable from './components/Advanced/AdvanceTable';
-import DropDown from './components/Helper/DropDown';
 
 
 function App() {
-  console.log("hey");
   return (
     <div className="App">
-    
-      <Nav/>
-      <Nav2/>
-      <Editor/>
-        {/* <AdvanceTable/> */}
-  
-      {/* <UseEffect/> */}
-       
+      <Router>
+        <Nav />
+        <Routes>
+          <Route path="/" element={<Editor />} />
+        </Routes>
+      </Router>
     </div>
   );
-} 
+}
 
 export default App;

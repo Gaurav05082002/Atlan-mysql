@@ -1,4 +1,4 @@
-
+import { Link } from 'react-router-dom';
 import React from 'react'
 import './Nav2.css'
 export default function Nav() {
@@ -13,14 +13,20 @@ export default function Nav() {
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#" style={{color:"white"}}>Home</a>
+          <Link class="nav-link active" aria-current="page" href="#"   to="/" style={{color:"white"}}>Home</Link>
         </li>
+        {/* <li class="nav-item">
+          <Link class="nav-link active" aria-current="page" href="#"   to="/Plots" style={{color:"white"}}>Plots</Link>
+        </li> */}
+        {/* <li class="nav-item">
+          <Link class="nav-link active" aria-current="page" href="#"   to="/Stats" style={{color:"white"}}>Stats</Link>
+        </li> */}
         
       </ul>
-      <form class="d-flex">
+      {/* <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search in whole page" aria-label="Search"></input>
         <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      </form> */}
       
     </div>
   </div>
