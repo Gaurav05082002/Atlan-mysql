@@ -36,8 +36,8 @@ const SqlQuery2 = ({ onExecute }) => {
           </Col>
           
           <Col>
-            <Dropdown onSelect={(selected) => setSelectedColumn(selected)}>
-              <Dropdown.Toggle variant="light" id="dropdown-column" size="sm">
+            <Dropdown onSelect={(selected) => setSelectedColumn(selected)}  >
+              <Dropdown.Toggle variant="light" id="dropdown-column" size="sm"   style={{ border:"solid 4px white" , animation: "glow 1.5s infinite alternate"}}>
                 {selectedColumn}
               </Dropdown.Toggle>
               <Dropdown.Menu>

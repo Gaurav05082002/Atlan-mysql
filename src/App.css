@@ -6,6 +6,9 @@
   height: 40vmin;
   pointer-events: none;
 }
+.custom-modal {
+  max-width: 80%; /* Set your custom width here */
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

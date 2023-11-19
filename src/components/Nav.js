@@ -15,9 +15,9 @@ export default function Nav() {
         <li class="nav-item">
           <Link class="nav-link active" aria-current="page" href="#"   to="/" style={{color:"white"}}>Home</Link>
         </li>
-        {/* <li class="nav-item">
-          <Link class="nav-link active" aria-current="page" href="#"   to="/Plots" style={{color:"white"}}>Plots</Link>
-        </li> */}
+        <li class="nav-item">
+          <Link class="nav-link active" aria-current="page" href="#"   to="/guideline" style={{color:"white"}}>Documentation</Link>
+        </li>
         {/* <li class="nav-item">
           <Link class="nav-link active" aria-current="page" href="#"   to="/Stats" style={{color:"white"}}>Stats</Link>
         </li> */}

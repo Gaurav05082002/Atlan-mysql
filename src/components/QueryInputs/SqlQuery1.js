@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Row, Col, Dropdown, Button } from 'react-bootstrap';
+import "./Glow.css";
 
 const SqlQuery1 = ({ onExecute }) => {
   const [selectedTable, setSelectedTable] = useState('choose');
@@ -64,7 +65,7 @@ const SqlQuery1 = ({ onExecute }) => {
           </Col>
           <Col>
             <Dropdown onSelect={(selected) => setSelectedTable(selected)}>
-              <Dropdown.Toggle variant="light" id="dropdown-table" size="sm">
+              <Dropdown.Toggle variant="light" id="dropdown-table" size="sm"   style={{ border:"solid 4px white" , animation: "glow 1.5s infinite alternate"}} >
                 {selectedTable}
               </Dropdown.Toggle>
               <Dropdown.Menu>
@@ -78,7 +79,7 @@ const SqlQuery1 = ({ onExecute }) => {
           </Col>
           <Col>
             <Dropdown onSelect={(selected) => setSelectedOperator(selected)}>
-              <Dropdown.Toggle variant="light" id="dropdown-operator" size="sm">
+              <Dropdown.Toggle variant="light" id="dropdown-operator" size="sm"   style={{ border:"solid 4px white" , animation: "glow 1.5s infinite alternate"}}>
                 {selectedOperator}
               </Dropdown.Toggle>
               <Dropdown.Menu>
@@ -98,6 +99,7 @@ const SqlQuery1 = ({ onExecute }) => {
               onChange={(e) => setNumberValue(e.target.value)}
               size="sm"
               className="form-control-sm"
+              style={{ border:"solid 4px white" , animation: "glow 1.5s infinite alternate"}}
             />
           </Col>
           <Col>

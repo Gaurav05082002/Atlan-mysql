@@ -1,0 +1,10 @@
+/* App.css or inline style */
+@keyframes glow {
+    from {
+      box-shadow: 0 0 1px white;
+    }
+    to {
+      box-shadow: 0 0 7px black, 0 0 7px black;
+    }
+  }
+  

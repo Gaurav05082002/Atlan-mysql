@@ -55,7 +55,7 @@ const Viewer = ({
   ];
 
   useEffect(() => {
-    const data = Data1;
+    const data = Data;
 
     setFilterData(data);
     setActualData(data);
