@@ -16,6 +16,11 @@ npm start
 ```
 # Features
 
+## pageload by https://pagespeed.web.dev/
+![pageloadjpg](https://github.com/Gaurav05082002/Atlan-mysql/assets/80939403/c5035f7d-1c69-4b31-8d6a-f687cbe36f60)
+
+
+
 ## Dynamic Query
 
 - **Query 1:** Allows you to execute a dynamic WHERE query. Input the necessary fields and execute the query.
