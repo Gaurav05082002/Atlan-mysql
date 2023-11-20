@@ -7,6 +7,7 @@ import Editor from './components/editor/Editor';
 import Guideline from './components/Guideline/Guideline';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap styles
 import { Modal, Button } from 'react-bootstrap'; // Import Bootstrap modal components
+import Stats from './components/Statistics/Stats';
 
 function App() {
   const [showGuidelineModal, setShowGuidelineModal] = useState(true);
@@ -20,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Editor />} />
           <Route path="/guideline" element={<Guideline />} />
+          <Route path="/Stats" element={<Stats />} />
         </Routes>
 
         {/* Bootstrap Modal for Guideline */}

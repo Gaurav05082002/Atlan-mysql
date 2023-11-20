@@ -5,7 +5,7 @@
 
 .show-details {
   border: 1px solid rgb(80, 125, 248);
-  color: lightblue;
+  color: white;
   background: transparent;
 }
 
@@ -30,8 +30,9 @@
   /* font-size: 14px; */
 }
 .small-buttons button {
-  font-size: 12px; /* Adjust the font size as needed */
-  padding: 5px 10px; /* Adjust the padding as needed */
+  font-size: 15px; /* Adjust the font size as needed */
+  padding: 5px 10px;
+  font-weight: bold; /* Adjust the padding as needed */
 }
 .results-heading {
   margin-right: auto; /* Push the heading to the left */

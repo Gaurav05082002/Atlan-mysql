@@ -7,10 +7,12 @@ import { GrActions } from "react-icons/gr";
 import { GrApps } from "react-icons/gr";
 import { AiFillGithub, AiFillFacebook, AiOutlineTwitter } from "react-icons/ai";
 import { IoBugSharp } from "react-icons/io5";
+import { GrBarChart } from "react-icons/gr";
 import SqlQuery1 from "../QueryInputs/SqlQuery1.js";
 import SqlQuery2 from "../QueryInputs/SqlQuery2.js";
 import "./Editor.css";
 import Viewer from "../table/Viewer.js";
+import { Link } from "react-router-dom";
 
 const Editor = () => {
   var a = 300;
@@ -25,6 +27,7 @@ const Editor = () => {
     React.useState("DefaultOperator");
   const [numberValue, setNumberValue] = useState("inputnum");
   const handleExecuteQuery1 = (table, operator, num) => {
+    setSelectedColumnQ2("DefaultCol");
     setSelectedTable(table);
     setSelectedOperator(operator);
     setNumberValue(num);
@@ -34,6 +37,9 @@ const Editor = () => {
   const [selectedColumnQ2, setSelectedColumnQ2] = React.useState("DefaultCol");
   const handleExecuteQuery2 = (columnq2) => {
     setSelectedColumnQ2(columnq2);
+    setSelectedTable("DefaultTable");
+    setSelectedOperator("DefaultOperator");
+    setNumberValue("inputnum");
   };
 
   //getting old queries
@@ -107,14 +113,15 @@ const Editor = () => {
           <button className="lbtn" onClick={themeing} id="minus">
             <GrActions />
           </button>
+          <Link to="/Stats">
           <button
             className="lbtn"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal3"
+            
           >
-            {" "}
-            <IoBugSharp />
+         
+            <GrBarChart/>
           </button>
+          </Link>
           <a target="blank" href="https://atlan.com/">
             <button className="lbtn">
               <GrApps />

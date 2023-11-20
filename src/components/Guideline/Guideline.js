@@ -45,6 +45,16 @@ const Guideline = () => {
             class="btn btn-secondary btn-sm"
             style={{ border: "solid 1px white" }}
           >
+            Stats
+          </button>
+           Open statistics for result of current query results
+        </li>
+        <li>
+          <button
+            type="button"
+            class="btn btn-secondary btn-sm"
+            style={{ border: "solid 1px white" }}
+          >
             Save Query
           </button>{" "}
           Saves the query and displays it in the Old Queries panel
@@ -102,6 +112,42 @@ const Guideline = () => {
         <li>Refresh Button: Refreshes the panel</li>
         <li>Delete All Button: Clears the Old Query Panel</li>
       </ul>
+      <h3>Statistics and analysis</h3>
+      <ul>   <li>
+          <button
+            type="button"
+            class="btn btn-secondary btn-sm"
+            style={{ border: "solid 1px white" }}
+          >
+            Stats
+          </button>
+          Stats Button: Dynamically see analysis for the result of any query.
+          </li>
+          <li>
+          <button   type="button"
+            class="btn btn-secondary btn-sm"
+            style={{ border: "solid 1px white" }}
+            >Download Report as PDF</button>
+             clicking on it download analysis report as pdf
+          </li>
+          
+        </ul>
+      
+
+        <h3>Documentation</h3>
+        <ul>
+        <li>
+          <button
+            type="button"
+            class="btn btn-secondary btn-sm"
+            style={{ border: "solid 1px white" }}
+          >
+            Documentation
+          </button>
+          Documentation Button: Check the documentation as guidefor using the
+          application.
+        </li>
+        </ul>
 
       <h3>Theme Change</h3>
       <p>The second button on the left allows you to change the theme.</p>

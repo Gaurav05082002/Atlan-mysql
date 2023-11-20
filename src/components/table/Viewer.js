@@ -15,6 +15,9 @@ import downloadJsonFile from "../Helper/DownloadJSON";
 import DropDown from "../Helper/DropDown";
 import { Query1Logic } from "../QueryInputs/Query1Logic";
 import { Query2Logic } from "../QueryInputs/Query2Logic";
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap styles
+import { Modal } from 'react-bootstrap'; // Import Bootstrap modal components
+import Stats from "../Statistics/Stats";
 
 const Viewer = ({
   selectedTable = "DefaultTable",
@@ -84,6 +87,8 @@ const Viewer = ({
       );
       setFilterData(newData);
       setRunningQuery(1);
+      setInputValue("");
+    setIsSearching(false);
     }
   }, [selectedTable, selectedOperator, numberValue]);
 
@@ -97,6 +102,8 @@ const Viewer = ({
 
       setFilterData(result);
       setRunningQuery(2);
+      setInputValue("");
+    setIsSearching(false);
     }
   }, [selectedColumnQ2]);
 
@@ -216,6 +223,14 @@ const Viewer = ({
     // setRunningQuery(0);
   };
 
+  //statistics
+  const [statsModal, setStatsModal] = useState(false);
+  const handleCloseStatsModal = () => setStatsModal(false);
+  const paramsForStats = {};
+  const openStatsModal = () => {
+    setStatsModal(true)
+  }
+
   const pageSize = 5;
   const pagesCount = Math.ceil(filterData.length / pageSize);
   const renderPaginationButtons = () => {
@@ -253,8 +268,20 @@ const Viewer = ({
             setFilterData(actualData);
           }}
           size="sm"
+          
         >
           Reset
+        </button>
+
+        <button
+          type="button"
+          className="btn btn-secondary btn-sm, downloadbtn"
+          onClick={() => {
+            openStatsModal();
+          }}
+          size="sm"
+        >
+          Stats
         </button>
 
         <button
@@ -272,7 +299,7 @@ const Viewer = ({
           className="form-control-sm "
           placeholder="Search By order id"
           size="sm"
-          // value={inputValue}
+          value={inputValue}
           onChange={handleInputChange}
         />
 
@@ -347,6 +374,20 @@ const Viewer = ({
               </PaginationItem>
             </Pagination>
           )}
+
+          <Modal show={ statsModal } onHide={handleCloseStatsModal } dialogClassName="custom-modal">
+          <Modal.Header closeButton>
+            <Modal.Title>Statistics</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Stats data={filterData} runningQuery={runningQuery}   selectedTable={selectedTable} selectedOperator={selectedOperator}  numberValue={numberValue} selectedColumnQ2= {selectedColumnQ2} searchedOrderID={inputValue} isSearching={isSearching} />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseStatsModal}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
         </div>
       </div>
     </>
