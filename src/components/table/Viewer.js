@@ -41,6 +41,8 @@ const Viewer = ({
   const [actualData, setActualData] = useState([]);
   const [runningQuery, setRunningQuery] = useState();
 
+  
+
   const [text, setText] = useState({
     orderID: false,
     productID: false,
@@ -334,8 +336,12 @@ const Viewer = ({
 
         <Table className="table table-striped table-dark">
           <thead>{renderTableHeader()}</thead>
+    
           <tbody>
-            {filterData
+
+            {
+              
+              filterData
               .slice(currentPage * 5, (currentPage + rowsNumber / 5) * 5)
               .map((i, index) => (
                 <tr key={i.orderID + "_" + index}>
